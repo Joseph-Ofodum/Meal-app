@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:meal/models/meal.dart';
 import 'package:meal/screens/categories.dart';
 import 'package:meal/screens/meals.dart';
+import 'package:meal/widgets/main_drawers.dart';
 
 class TabsScreen extends StatefulWidget {
   const TabsScreen({super.key});
@@ -18,7 +19,11 @@ class _TabScreenState extends State<TabsScreen> {
 
   void _showInfoMessage(String message) {
     ScaffoldMessenger.of(context).clearSnackBars();
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message),),);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+      ),
+    );
   }
 
   void _toggleFavoriteStatus(Meal meal) {
@@ -29,11 +34,10 @@ class _TabScreenState extends State<TabsScreen> {
         _favoriteMeal.remove(meal);
         _showInfoMessage("Meal is no longer a favorite");
       });
-
     } else {
       setState(() {
         _favoriteMeal.add(meal);
-     _showInfoMessage("Meal is now a favorite");
+        _showInfoMessage("Meal is now a favorite");
       });
     }
   }
@@ -62,6 +66,7 @@ class _TabScreenState extends State<TabsScreen> {
       appBar: AppBar(
         title: Text(activePageTitle),
       ),
+      drawer: const MainDrawer(),
       body: activePage,
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectPage,
